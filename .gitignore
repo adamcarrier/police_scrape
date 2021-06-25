@@ -2,4 +2,5 @@
 .vscode/
 __pycache__/
 firebase_config.py
+gcp_config.py
 serviceAccountKey.json

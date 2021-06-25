@@ -35,7 +35,7 @@ def main():
                         report[columns[n]] = text
                         n = n + 1
                 # print(json.dumps(report))
-                save_offense('nnpd', json.dumps(report))
+                save_offense('nnpd', 'NEWPORT NEWS, VA', json.dumps(report))
 
     # Scrape the Daily Arrest Reports
     for page in nnpd_pages.get_arrest_pages():
@@ -73,7 +73,7 @@ def main():
                         report[columns[n+1]] = text
                         n = n + 1
                 # print(json.dumps(report))
-                save_arrest('nnpd', json.dumps(report))
+                save_arrest('nnpd', 'NEWPORT NEWS, VA', json.dumps(report))
 
 def capitalize_words(s):
     words = re.findall(r'\w+', s)
