@@ -94,4 +94,4 @@ def save_arrest(agency_id, location, incident):
 
 def get_string(jsonObj):
     pyObj = json.loads(jsonObj)
-    return pyObj[0]
+    return str(pyObj[0])
