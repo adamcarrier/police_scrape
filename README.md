@@ -29,6 +29,10 @@ To configure the project to write to your Firebase database:
  3. In the `firebase_config.py` file, change the `'serviceAccountKey.json'` filename to match your service key's filename.
  4. Change the `firebase_database_url` to your Firebase database's URL.
 
+ To configure the project to automatically geocode the addresses (i.e., get the formatted address, latitude, and longitude):
+ 1. Rename the `gcp_config_sample.py` file to `gcp_config.py`.
+ 2. In the `gcp_config.py` file, change the `gcp_api_key` API key to your Google Cloud Platform API key.
+
  To run the script:
  ```
  % python3 police_scrape.py
