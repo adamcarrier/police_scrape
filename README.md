@@ -33,7 +33,11 @@ To configure the project to write to your Firebase database:
  1. Rename the `gcp_config_sample.py` file to `gcp_config.py`.
  2. In the `gcp_config.py` file, change the `gcp_api_key` API key to your Google Cloud Platform API key.
 
- To run the script:
- ```
- % python3 police_scrape.py
- ```
+To run the script:
+```
+% python3 police_scrape.py
+```
+Optionally, you can run the script only for today's reports. This is useful when automating this to run one or more times a day. There's no need to re-pull and re-process reports from previous days, especially considering geocoding is done for each incident, which uses metered Google Cloud resources.
+```
+% python3 police_scrape.py today
+```

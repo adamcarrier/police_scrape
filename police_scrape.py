@@ -1,18 +1,35 @@
 #!/usr/bin/env python3
 # Main script for running the police data collection and firebase sync modules
 
-import requests, json, re
+import sys, requests, json, re, datetime
 import nnpd_pages
 from bs4 import BeautifulSoup
 from firebase_sync import save_offense, save_arrest, init_db
 
 def main():
+    day = ''
+    scope = 'all'
+    if len(sys.argv) > 1 and sys.argv[1] == 'today':
+        scope = 'today'
+        today = datetime.date.today()
+        day = today.strftime("%A")  # Ex: "Sunday"
+
     # Init the Firebase DB (only do this once)
     init_db()
 
     # Scrape the Daily Offense Reports
-    for page in nnpd_pages.get_offense_pages():
-        html = requests.get(page)
+    pages = nnpd_pages.get_offense_pages()
+    today = {}
+
+    # If desired, get only today's page
+    if scope == 'today':
+        for item in pages.items():
+            if item[0] == day:
+                today[item[0]] = item[1]
+        pages = today
+
+    for page in pages:
+        html = requests.get(pages[page])
         soup = BeautifulSoup(html.content, 'html.parser')
 
         # Get column headings
@@ -38,8 +55,18 @@ def main():
                 save_offense('nnpd', 'NEWPORT NEWS, VA', json.dumps(report))
 
     # Scrape the Daily Arrest Reports
-    for page in nnpd_pages.get_arrest_pages():
-        html = requests.get(page)
+    pages = nnpd_pages.get_arrest_pages()
+    today = {}
+
+    # If desired, get only today's page
+    if scope == 'today':
+        for item in pages.items():
+            if item[0] == day:
+                today[item[0]] = item[1]
+        pages = today
+
+    for page in pages:
+        html = requests.get(pages[page])
         soup = BeautifulSoup(html.content, 'html.parser')
 
         # Get page date
