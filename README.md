@@ -33,6 +33,14 @@ To configure the project to write to your Firebase database:
  1. Rename the `gcp_config_sample.py` file to `gcp_config.py`.
  2. In the `gcp_config.py` file, change the `gcp_api_key` API key to your Google Cloud Platform API key.
 
+## Running the script
+Before running the script, you'll need to install the following as root. This is an example for CentOS:
+```
+% yum install python3 python3-devel gcc-c++
+% pip3 install BeautifulSoup4
+% pip3 install firebase_admin
+```
+
 To run the script:
 ```
 % python3 police_scrape.py
