@@ -49,3 +49,9 @@ Optionally, you can run the script only for today's reports. This is useful when
 ```
 % python3 police_scrape.py today
 ```
+
+To schedule running the script, you can use cron on a Linux server. Here's an example crontab entry that runs the script each hour, on the hour, from 9am to 11pm:
+```
+[dev@localhost ~]$ crontab -l
+00 09-23 * * * python3 /home/dev/police_scrape/police_scrape.py today >/dev/null 2>&1
+```
